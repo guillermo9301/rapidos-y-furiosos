@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Empleados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Empleados Registrados</h1>
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>DNI</th>
+          <th>Celular</th>
+          <th>Correo</th>
+          <th>Distrito</th>
+          <th>Rol</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for emp in empleados %}
+        <tr>
+          <td>{{ emp.codemp }}</td>
+          <td>{{ emp.nomemp }} {{ emp.apepemp }}</td>
+          <td>{{ emp.dniemp }}</td>
+          <td>{{ emp.celemp }}</td>
+          <td>{{ emp.coremp }}</td>
+          <td>{{ emp.nomdis }}</td>
+          <td>{{ emp.nomrol }}</td>
+          <td>{{ 'Activo' if emp.estemp else 'Inactivo' }}</td>
+          <td>
+            <a href="/empleado/actualizar/{{ emp.codemp }}" class="btn btn-sm btn-warning">Editar</a>
+            <a href="/empleado/habilitar/{{ emp.codemp }}" class="btn btn-sm btn-secondary">Habilitar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
