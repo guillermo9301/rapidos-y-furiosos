@@ -46,7 +46,7 @@ public class ClienteEntity implements Serializable {
 	private String celular;
 	@Column(name = "corcli",length = 40,nullable = false)
 	private String correo;
-	@Column(name = "estsex",nullable = false)
+	@Column(name = "estcli",nullable = false)
 	private boolean estado;
 	@ManyToOne
 	@JoinColumn(name = "coddis",nullable = false)

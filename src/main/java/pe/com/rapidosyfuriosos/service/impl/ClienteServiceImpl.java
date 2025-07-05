@@ -50,7 +50,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteEntity enable(Long id) {
         ClienteEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }
