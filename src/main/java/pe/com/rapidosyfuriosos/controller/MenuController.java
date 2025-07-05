@@ -13,12 +13,14 @@ public class MenuController {
     @GetMapping("/menuprincipal")
     public String mostrarMenu(Model model) {
         model.addAttribute("entidades", List.of(
+                new MenuItem("Clientes", "/cliente/vista"),
+                new MenuItem("Empleados", "/empleado/vista"),
                 new MenuItem("Distrito", "/distrito/vista"),
                 new MenuItem("Color", "/color/vista"),
                 new MenuItem("Marca", "/marca/vista"),
                 new MenuItem("Rol", "/rol/vista"),
                 new MenuItem("Sexo", "/sexo/vista"),
-                new MenuItem("Tipo Documento", "/tipodocumento/vista")
+                new MenuItem("Vehiculos", "/vehiculo/vista")
         ));
         return "menuprincipal";
     }
