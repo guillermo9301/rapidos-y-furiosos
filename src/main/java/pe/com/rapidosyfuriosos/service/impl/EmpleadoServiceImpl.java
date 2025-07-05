@@ -50,7 +50,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public EmpleadoEntity enable(Long id) {
         EmpleadoEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }

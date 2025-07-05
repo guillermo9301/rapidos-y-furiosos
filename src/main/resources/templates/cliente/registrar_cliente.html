@@ -1,91 +1,102 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar Cliente</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mt-5">
-    <div class="card">
-      <div class="card-header">
-        <h1>Registrar Cliente</h1>
-      </div>
-      <div class="card-body">
-        <form action="/cliente/registrar" method="post">
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Nombres</label>
-              <input type="text" class="form-control" name="nomcli" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" name="apepcli" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" name="apemcli" required>
-            </div>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h1>Registrar Cliente</h1>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/cliente/registrar}" method="post" th:object="${cliente}">
+        <div class="row mb-3">
+          <div class="col">
+            <label>Nombre</label>
+            <input type="text" class="form-control" th:field="*{nombre}" required>
           </div>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Documento</label>
-              <input type="text" class="form-control" name="doccli" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Fecha de Nacimiento</label>
-              <input type="date" class="form-control" name="feccli" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Teléfono</label>
-              <input type="text" class="form-control" name="telcli">
-            </div>
+          <div class="col">
+            <label>Apellido Paterno</label>
+            <input type="text" class="form-control" th:field="*{apellidopaterno}" required>
           </div>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Celular</label>
-              <input type="text" class="form-control" name="celcli" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Correo</label>
-              <input type="email" class="form-control" name="corcli">
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Dirección</label>
-              <input type="text" class="form-control" name="dircli" required>
-            </div>
+          <div class="col">
+            <label>Apellido Materno</label>
+            <input type="text" class="form-control" th:field="*{apellidomaterno}" required>
           </div>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Distrito</label>
-              <select class="form-control" name="coddis">
-                {% for dis in distritos %}
-                <option value="{{ dis.coddis }}">{{ dis.nomdis }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Sexo</label>
-              <select class="form-control" name="codsex">
-                {% for sex in sexos %}
-                <option value="{{ sex.codsex }}">{{ sex.nomsex }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Tipo de Documento</label>
-              <select class="form-control" name="codtipd">
-                {% for tip in tipos %}
-                <option value="{{ tip.codtipd }}">{{ tip.nomtipd }}</option>
-                {% endfor %}
-              </select>
-            </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label>Tipo Documento</label>
+            <select class="form-control" th:field="*{tipodocumento}">
+              <option th:each="tip : ${tiposDocumento}" th:value="${tip.codigo}" th:text="${tip.nombre}"></option>
+            </select>
           </div>
-          <button type="submit" class="btn btn-success">Registrar</button>
-        </form>
-      </div>
+          <div class="col">
+            <label>N° Documento</label>
+            <input type="text" class="form-control" th:field="*{numerodocumento}" required>
+          </div>
+          <div class="col">
+            <label>Fecha Nacimiento</label>
+            <input type="date" class="form-control" th:field="*{fechanacimiento}" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label>Dirección</label>
+            <input type="text" class="form-control" th:field="*{direccion}" required>
+          </div>
+          <div class="col">
+            <label>Distrito</label>
+              <select class="form-control" th:field="*{distrito}" required>
+              <option value="" disabled selected>Seleccione</option>
+              <option th:each="dis : ${distritos}" th:value="${dis.codigo}" th:text="${dis.nombre}"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" th:field="*{telefono}">
+          </div>
+          <div class="col">
+            <label>Celular</label>
+            <input type="text" class="form-control" th:field="*{celular}">
+          </div>
+          <div class="col">
+            <label>Correo</label>
+            <input type="email" class="form-control" th:field="*{correo}">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label>Sexo</label>
+            <select class="form-control" th:field="*{sexo}">
+              <option value="" disabled selected>Seleccione</option>
+              <option th:each="sex : ${sexos}" th:value="${sex.codigo}" th:text="${sex.nombre}"></option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Estado</label>
+            <select class="form-control" th:field="*{estado}">
+
+              <option th:value="true">Activo</option>
+              <option th:value="false">Inactivo</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Registrar</button>
+        <a href="/cliente/vista" class="btn btn-secondary">Cancelar</a>
+      </form>
     </div>
   </div>
+</div>
 </body>
 </html>

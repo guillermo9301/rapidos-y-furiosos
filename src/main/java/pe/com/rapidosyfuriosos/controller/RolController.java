@@ -3,11 +3,13 @@ package pe.com.rapidosyfuriosos.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.com.rapidosyfuriosos.entity.RolEntity;
 import pe.com.rapidosyfuriosos.service.RolService;
 
-@RestController
+@Controller
 @RequestMapping("/rol")
 public class RolController {
 
@@ -42,5 +44,42 @@ public class RolController {
     @PutMapping("/enable/{id}")
     public RolEntity habilitar(@PathVariable Long id) {
         return service.enable(id);
+    }
+
+    @GetMapping("/vista")
+    public String listarVista(Model model) {
+        model.addAttribute("roles", service.findAll());
+        return "rol/listar_rol";
+    }
+
+    @GetMapping("/registrar")
+    public String mostrarFormularioRegistro(Model model) {
+        model.addAttribute("rol", new RolEntity());
+        return "rol/registrar_rol";
+    }
+
+    @PostMapping("/registrar")
+    public String registrarRol(@ModelAttribute("rol") RolEntity rol) {
+        service.add(rol);
+        return "redirect:/rol/vista";
+    }
+
+    @GetMapping("/actualizar/{id}")
+    public String mostrarFormularioActualizar(@PathVariable Long id, Model model) {
+        RolEntity rol = service.findById(id);
+        model.addAttribute("rol", rol);
+        return "rol/actualizar_rol";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarRol(@ModelAttribute("rol") RolEntity rol) {
+        service.update(rol, rol.getCodigo());
+        return "redirect:/rol/vista";
+    }
+
+    @GetMapping("/habilitar/{id}")
+    public String habilitarOInhabilitar(@PathVariable Long id) {
+        service.enable(id); // cambia el estado actual
+        return "redirect:/rol/vista";
     }
 }

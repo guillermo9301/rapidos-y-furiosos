@@ -50,7 +50,7 @@ public class RolServiceImpl implements RolService {
     @Override
     public RolEntity enable(Long id) {
         RolEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }

@@ -50,7 +50,7 @@ public class VehiculoServiceImpl implements VehiculoService {
     @Override
     public VehiculoEntity enable(Long id) {
         VehiculoEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }
