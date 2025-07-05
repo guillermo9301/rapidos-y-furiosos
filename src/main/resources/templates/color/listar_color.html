@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Colores</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="mb-4">Colores Registrados</h1>
+  <a th:href="@{/color/registrar}" class="btn btn-primary mb-3">Registrar Nuevo Color</a>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="col : ${colores}">
+      <td th:text="${col.codigo}">1</td>
+      <td th:text="${col.nombre}">Rojo</td>
+      <td th:text="${col.estado} ? 'Activo' : 'Inactivo'">Activo</td>
+      <td>
+        <a th:href="@{/color/actualizar/{id}(id=${col.codigo})}" class="btn btn-sm btn-warning">Editar</a>
+        <a th:href="@{/color/habilitar/{id}(id=${col.codigo})}" class="btn btn-sm btn-secondary"
+           th:text="${col.estado} ? 'Inhabilitar' : 'Habilitar'">Habilitar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

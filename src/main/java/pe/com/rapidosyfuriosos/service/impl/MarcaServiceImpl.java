@@ -50,7 +50,7 @@ public class MarcaServiceImpl implements MarcaService {
     @Override
     public MarcaEntity enable(Long id) {
         MarcaEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }

@@ -22,6 +22,6 @@ public class RolEntity implements Serializable {
     @Column(name = "nomrol", length = 40, nullable = false)
     private String nombre;
 
-    @Column(name = "estrol", nullable = false)
+    @Column(name = "estado", nullable = false)
     private boolean estado;
 }

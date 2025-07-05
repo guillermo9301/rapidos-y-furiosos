@@ -50,7 +50,7 @@ public class SexoServiceImpl implements SexoService {
     @Override
     public SexoEntity enable(Long id) {
         SexoEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }

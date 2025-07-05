@@ -50,7 +50,7 @@ public class TipoDocumentoImpl implements TipoDocumentoService {
     @Override
     public TipoDocumentoEntity enable(Long id) {
         TipoDocumentoEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }

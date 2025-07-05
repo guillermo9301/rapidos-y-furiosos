@@ -50,7 +50,7 @@ public class ColorServiceImpl implements ColorService {
     @Override
     public ColorEntity enable(Long id) {
         ColorEntity obj = repo.getById(id);
-        obj.setEstado(true);
+        obj.setEstado(!obj.isEstado());
         return repo.save(obj);
     }
 }
